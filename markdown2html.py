@@ -5,7 +5,6 @@
 import re
 import sys
 import hashlib
-import pdb
 
 
 dictwrap = {"#": ["<h1>", "</h1>"],
@@ -19,10 +18,12 @@ dictwrap = {"#": ["<h1>", "</h1>"],
 
 
 def wraptext(text, tag1, tag2):
+    """wrap a text with two tags"""
     return tag1 + text + tag2
 
 
 def markdown2html(mdFilename, HTMLFilename):
+    """Convert a .md file into a .html format"""
     with open(mdFilename, "r") as mdFile:
         lines = mdFile.read().split("\n\n")
 
@@ -32,8 +33,6 @@ def markdown2html(mdFilename, HTMLFilename):
             continue
         if line == lines[-1]:
             line = line[:-1]
-
-        # pdb.set_trace()
 
         md5Tags = re.findall(r"\[\[[^\[\]]*\]\]", line)
         for tag in md5Tags:
@@ -119,6 +118,7 @@ def markdown2html(mdFilename, HTMLFilename):
 
 
 if __name__ == "__main__":
+    """main program"""
     if len(sys.argv) <= 2:
         sys.stderr.write("Usage: ./markdown2html.py README.md README.html\n")
         sys.exit(1)
