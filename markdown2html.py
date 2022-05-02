@@ -34,7 +34,7 @@ def markdown2html(mdFilename, HTMLFilename):
         if line == lines[-1]:
             line = line[:-1]
 
-        md5Tags = re.findall(r"\[\[[^\[\]]*\]\]", line)
+        md5Tags = re.findall("\[\[[^\[\]]*\]\]", line)
         for tag in md5Tags:
             if tag != '':
                 aux = tag.replace('[[', '')
@@ -44,20 +44,20 @@ def markdown2html(mdFilename, HTMLFilename):
                 encrypt = encrypt.hexdigest()
                 line = line.replace(tag, encrypt)
 
-        noCTags = re.findall(r"\(\([^\(\)]*\)\)", line)
+        noCTags = re.findall("\(\([^\(\)]*\)\)", line)
         for tag in noCTags:
             if tag != '':
                 aux = tag.replace('((', '').replace('))', '')
                 aux = aux. replace('c', '').replace('C', '')
                 line = line.replace(tag, aux)
 
-        boldTags = re.findall(r"\*\*[^\*\*]*\*\*", line)
+        boldTags = re.findall("\*\*[^\*\*]*\*\*", line)
         for tag in boldTags:
             if tag != '':
                 line = line.replace(tag, wraptext(tag.split("**")[1],
                                                   "<b>", "</b>"))
 
-        emTags = re.findall(r"__[^__]*__", line)
+        emTags = re.findall("__[^__]*__", line)
         for tag in emTags:
             if tag != '':
                 line = line.replace(tag, wraptext(tag.split("__")[1],
